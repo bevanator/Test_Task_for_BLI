@@ -25,12 +25,13 @@ public class RaycastObj : MonoBehaviour
     GameObject clone1;
 
     bool autoSave;
+    public float saveInt = 10f;
 
     public void Start()
     {
         loadData();
         autoSave = true;
-        StartCoroutine(Save());
+        StartCoroutine(Save(saveInt));
     }
     void Update()
     {
@@ -49,6 +50,8 @@ public class RaycastObj : MonoBehaviour
             }
         }
         if (Input.GetKeyDown(KeyCode.X)) clearScreen();
+
+        if (Input.GetMouseButtonUp(0)) serializeData();
 
 
     }
@@ -167,11 +170,11 @@ public class RaycastObj : MonoBehaviour
         spawnCube = false;
     }
 
-    IEnumerator Save()
+    IEnumerator Save(float delay)
     {
-        while(true)
+        while(autoSave)
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(delay);
             serializeData();
 
             print("Saved "+ clones.Length +" objects");
