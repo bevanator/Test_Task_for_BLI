@@ -1,3 +1,5 @@
+// Author: Rimon A. Bevan
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +32,7 @@ public class RaycastObj : MonoBehaviour
     public void Start()
     {
         loadData();
-        autoSave = true;
+        //autoSave = true;
         StartCoroutine(Save(saveInt));
     }
     void Update()
@@ -57,7 +59,9 @@ public class RaycastObj : MonoBehaviour
     }
 
 
-    void clearScreen()
+    /* Method to delete all objects in the scene */
+
+    void clearScreen()                                                                        
     {
         //Destroy(GameObject.FindWithTag("clickable"));
         clones = GameObject.FindGameObjectsWithTag("clickable");
@@ -75,6 +79,8 @@ public class RaycastObj : MonoBehaviour
 
 
     }
+
+    /* Method to activate rotation script on selected object */
     void editRotation()
     {
         editRotate = !editRotate;
@@ -92,6 +98,11 @@ public class RaycastObj : MonoBehaviour
             next.GetComponent<Rotate>().enabled = false;
         }
     }
+
+
+
+    /* Method to activate editMode */
+
     void editMove()
     {
         editMode = true;
@@ -114,6 +125,8 @@ public class RaycastObj : MonoBehaviour
 
         }
     }
+
+    /* Method for instantiation */
     void spawnObjects()
     {
         if (!editMode)
@@ -132,6 +145,7 @@ public class RaycastObj : MonoBehaviour
         }
     }
 
+    /* Spawing Cubes */
     GameObject CreateCube(Vector3 size)
     {
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -144,6 +158,7 @@ public class RaycastObj : MonoBehaviour
 
     }
 
+    /* Spawing Spheres */
     GameObject CreateSphere(Vector3 size)
     {
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -156,6 +171,8 @@ public class RaycastObj : MonoBehaviour
 
     }
 
+
+    /* public button action methods */
     public void enableCube()
     {
         editMode = false;
@@ -170,6 +187,7 @@ public class RaycastObj : MonoBehaviour
         spawnCube = false;
     }
 
+    /* Method to save at set intervals */
     IEnumerator Save(float delay)
     {
         while(autoSave)
@@ -180,9 +198,10 @@ public class RaycastObj : MonoBehaviour
             print("Saved "+ clones.Length +" objects");
             
         }
-
-        
+ 
     }
+
+    /* Serialize data using SceneData class and store as JSON */
     void serializeData()
     {
         clones = GameObject.FindGameObjectsWithTag("clickable");
@@ -205,7 +224,7 @@ public class RaycastObj : MonoBehaviour
 
     }
 
-
+    /* load data from JSON string and use it for reinstantiation */
     void loadData()
     {
         string jsonL = PlayerPrefs.GetString("SceneData");
