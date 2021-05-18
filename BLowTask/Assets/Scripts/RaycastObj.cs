@@ -139,7 +139,7 @@ public class RaycastObj : MonoBehaviour
         }
     }
 
-    /* Spawing Cubes */
+    /* Spawning Cubes */
     GameObject CreateCube(Vector3 size)
     {
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -152,7 +152,7 @@ public class RaycastObj : MonoBehaviour
 
     }
 
-    /* Spawing Spheres */
+    /* Spawning Spheres */
     GameObject CreateSphere(Vector3 size)
     {
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
