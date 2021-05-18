@@ -37,25 +37,19 @@ public class RaycastObj : MonoBehaviour
     }
     void Update()
     {
-        myRay = Camera.main.ScreenPointToRay(Input.mousePosition); 
-
-        if (Physics.Raycast(myRay, out hit, 1000f))
+        if (Input.GetMouseButtonDown(0))
         {
-
-            if (Input.GetKeyDown(KeyCode.R)) editRotation();
-
-            if (Input.GetMouseButtonDown(0))
+            myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(myRay, out hit, 1000f))
             {
                 if (hit.collider.CompareTag("plane")) spawnObjects();
                 if (hit.collider.CompareTag("clickable")) editMove();
-                //Debug.Log(editRotate);
+
             }
         }
+        if (Input.GetKeyDown(KeyCode.R)) editRotation();
         if (Input.GetKeyDown(KeyCode.X)) clearScreen();
-
         if (Input.GetMouseButtonUp(0)) serializeData();
-
-
     }
 
 
